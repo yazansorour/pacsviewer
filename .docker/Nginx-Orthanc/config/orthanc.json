@@ -6,6 +6,7 @@
   "MaximumStorageSize": 0,
   "MaximumPatientCount": 0,
   "LuaScripts": [],
+  "ExecuteLuaEnabled" : true,
   "Plugins": ["/usr/share/orthanc/plugins", "/usr/local/share/orthanc/plugins"],
   "ConcurrentJobs": 2,
   "HttpServerEnabled": true,

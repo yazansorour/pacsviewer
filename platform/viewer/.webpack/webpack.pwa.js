@@ -139,7 +139,9 @@ module.exports = (env, argv) => {
       // https: true,
       hot: true,
       open: true,
+      host: '192.168.1.67',
       port: 3000,
+      allowedHosts: ['mohintreg.duckdns.org', 'wowit.duckdns.org'],
       client: {
         overlay: { errors: true, warnings: false },
       },

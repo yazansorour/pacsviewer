@@ -18,7 +18,7 @@ function LoadingIndicatorProgress({ className, textBlock, progress }) {
         className
       )}
     >
-      <Icon name="loading-ohif-mark" className="text-white w-12 h-12" />
+      <Icon name="loading-ohif-mark" className="text-white w-24 h-24" />
       <div className="loading">
         {progress === undefined || progress === null ? (
           <div className="infinite-loading-bar bg-primary-light"></div>

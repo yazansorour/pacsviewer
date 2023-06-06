@@ -7,11 +7,6 @@ const Header = () => {
       <div className="flex justify-between flex-1">
         <div className="flex items-center">
           <div className="inline-flex items-center mr-3">
-            <Icon
-              name="chevron-left"
-              className="w-8 cursor-pointer text-primary-active"
-              onClick={() => alert('Navigate to previous page')}
-            />
             <a href="#" className="ml-4">
               <Svg name="logo-ohif" />
             </a>

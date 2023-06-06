@@ -16,7 +16,7 @@
     "npm": ">=6",
     "yarn": ">=1.16.0"
   },
-  "proxy": "http://localhost:8042",
+  "proxy": "http://192.168.1.67:8042",
   "scripts": {
     "build:viewer": "cross-env NODE_ENV=production yarn run build",
     "build:dev": "cross-env NODE_ENV=development yarn run build",
@@ -27,6 +27,7 @@
     "build": "node --max_old_space_size=4096 ./../../node_modules/webpack/bin/webpack.js --progress --config .webpack/webpack.pwa.js",
     "dev": "cross-env NODE_ENV=development webpack serve --config .webpack/webpack.pwa.js",
     "dev:orthanc": "cross-env NODE_ENV=development PROXY_TARGET=/dicom-web PROXY_DOMAIN=http://localhost:8042 APP_CONFIG=config/docker_nginx-orthanc.js webpack serve --config .webpack/webpack.pwa.js",
+    "prod:orthanc": "cross-env NODE_ENV=production PROXY_TARGET=/dicom-web PROXY_DOMAIN=http://localhost:8042 APP_CONFIG=config/docker_nginx-orthanc.js webpack serve --config .webpack/webpack.pwa.js",
     "dev:dcm4chee": "cross-env NODE_ENV=development APP_CONFIG=config/local_dcm4chee.js webpack serve --config .webpack/webpack.pwa.js",
     "dev:static": "cross-env NODE_ENV=development APP_CONFIG=config/local_static.js webpack serve --config .webpack/webpack.pwa.js",
     "dev:viewer": "yarn run dev",

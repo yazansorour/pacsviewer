@@ -127,7 +127,7 @@ export default async function init({
     sharedArrayBufferImageLoader
   );
 
-  metaData.addProvider(metadataProvider.get.bind(metadataProvider), 9999);
+  metaData.addProvider(metadataProvider.get.bind(metadataProvider), -1);
 
   imageLoadPoolManager.maxNumRequests = {
     interaction: appConfig?.maxNumRequests?.interaction || 100,

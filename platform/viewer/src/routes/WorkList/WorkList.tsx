@@ -385,7 +385,7 @@ function WorkList({
       onClick: () =>
         show({
           content: AboutModal,
-          title: 'About OHIF Viewer',
+          title: 'About WOW Viewer',
           contentProps: { versionNumber, buildNumber },
         }),
     },

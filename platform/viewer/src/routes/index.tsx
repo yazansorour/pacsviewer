@@ -11,6 +11,7 @@ import NotFound from './NotFound';
 import buildModeRoutes from './buildModeRoutes';
 import PrivateRoute from './PrivateRoute';
 
+const notFoundRoute = { component: NotFound };
 // TODO: Include "routes" debug route if dev build
 const bakedInRoutes = [
   // WORK LIST
@@ -18,7 +19,7 @@ const bakedInRoutes = [
     path: '/',
     children: DataSourceWrapper,
     private: true,
-    props: { children: WorkList },
+    props: { children: NotFound },
   },
   {
     path: '/debug',
@@ -31,12 +32,11 @@ const bakedInRoutes = [
 ];
 
 // NOT FOUND (404)
-const notFoundRoute = { component: NotFound };
 const WorkListRoute = {
   path: '/',
   children: DataSourceWrapper,
   private: true,
-  props: { children: WorkList },
+  props: { children: NotFound },
 };
 
 const createRoutes = ({

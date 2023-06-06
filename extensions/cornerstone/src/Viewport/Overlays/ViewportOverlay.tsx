@@ -119,34 +119,69 @@ function CornerstoneViewportOverlay({
     };
   }, [viewportIndex, viewportData]);
 
-  const getTopLeftContent = useCallback(() => {
-    const { windowWidth, windowCenter } = voi;
+  const preparePatientInfo = (imageId) => {
+    const dicomTags =  metaData.get('instance',imageId)
+    return {"full_name":dicomTags['PatientName'][0].Alphabetic.replaceAll('^'," ") 
+    , "mrn":dicomTags['PatientID']
+    , "dob":dicomTags['PatientBirthDate']
+    , "gender":dicomTags['PatientSex']
+  }
+  }
 
+  const getTopLeftContent = useCallback(() => {
+    if (!viewportData) {
+      return;
+    }
+    const {imageIndex} = imageSliceData;
+    const imageIds = viewportData.data.imageIds;
+    const imageId = imageIds[imageIndex];
+    if (!imageId) {
+      return;
+    }
+    const patient = preparePatientInfo(imageId);
+
+    const { windowWidth, windowCenter } = voi;
     if (activeTools.includes('WindowLevel')) {
       if (typeof windowCenter !== 'number' || typeof windowWidth !== 'number') {
         return null;
       }
-
       return (
-        <div className="flex flex-row">
+        <div className="flex">
+          <div className="flex-row">
           <span className="mr-1">W:</span>
           <span className="ml-1 mr-2 font-light">{windowWidth.toFixed(0)}</span>
           <span className="mr-1">L:</span>
           <span className="ml-1 font-light">{windowCenter.toFixed(0)}</span>
-        </div>
+          <br/>
+          <p className='font-light'>{patient.full_name}</p>
+          <p className='font-light'>{patient.mrn}</p>
+          <p className='font-light'>{patient.dob} - {patient.gender}</p>
+          </div>
+         </div>
       );
     }
-
     if (activeTools.includes('Zoom')) {
       return (
-        <div className="flex flex-row">
+        <div className="flex">
+          <div className="flex-row">
           <span className="mr-1">Zoom:</span>
           <span className="font-light">{scale.toFixed(2)}x</span>
+          <br/>
+          <p className='font-light'>{patient.full_name}</p>
+          <p className='font-light'>{patient.mrn}</p>
+          <p className='font-light'>{patient.dob} - {patient.gender}</p>
+          </div>
         </div>
       );
     }
 
-    return null;
+    return (
+      <div>
+          <p className='font-light'>{patient.full_name}</p>
+          <p className='font-light'>{patient.mrn}</p>
+          <p className='font-light'>{patient.dob} - {patient.gender}</p>
+      </div>
+    );
   }, [voi, scale, activeTools]);
 
   const getTopRightContent = useCallback(() => {
