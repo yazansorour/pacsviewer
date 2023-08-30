@@ -221,6 +221,25 @@ const toolbarButtons = [
       ],
     },
   },
+  // Report..
+  {
+    id: 'Report',
+    type: 'ohif.action',
+    props: {
+      type: 'action',
+      icon: 'tool-report',
+      label: 'Report',
+      commands: [
+        {
+          commandName: 'showReport',
+          commandOptions: {
+            toolName: 'Report',
+          },
+          context: 'CORNERSTONE',
+        },
+      ],
+    },
+  },
   // Window Level + Presets...
   {
     id: 'WindowLevel',

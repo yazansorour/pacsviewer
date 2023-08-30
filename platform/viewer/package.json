@@ -16,7 +16,7 @@
     "npm": ">=6",
     "yarn": ">=1.16.0"
   },
-  "proxy": "http://192.168.1.67:8042",
+  "proxy": "http://10.10.215.70:8042",
   "scripts": {
     "build:viewer": "cross-env NODE_ENV=production yarn run build",
     "build:dev": "cross-env NODE_ENV=development yarn run build",

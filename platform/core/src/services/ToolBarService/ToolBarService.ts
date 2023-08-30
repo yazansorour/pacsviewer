@@ -84,6 +84,10 @@ export default class ToolBarService {
         });
         break;
       }
+      case 'report': {
+        window.open('https://www.example.com', 'popup', 'width=600,height=400');
+        break;
+      }
       case 'tool': {
         try {
           commands.forEach(

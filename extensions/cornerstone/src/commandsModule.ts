@@ -208,6 +208,23 @@ const commandsModule = ({ servicesManager }) => {
         });
       }
     },
+    showReport: () => {
+      const { activeViewportIndex } = ViewportGridService.getState();
+      console.log(CornerstoneViewportService.getViewportInfoByIndex(activeViewportIndex).viewportData.data.StudyInstanceUID);
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "Basic ZDg2OWEzOTkxNTdlMTM5OjVmOGQ4OWMwZTZmMTg0Yw==");
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+      fetch(`http://10.10.215.70/api/resource/Study Report?filters=[[\"studyinstanceuid\",\"=\",\"${CornerstoneViewportService.getViewportInfoByIndex(activeViewportIndex).viewportData.data.StudyInstanceUID}\"]]`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            window.open(`http://10.10.215.70/api/method/frappe.utils.weasyprint.download_pdf?doctype=Study%20Report&name=${result.data[0].name}&print_format=study+report&letterhead=`, 'popup', 'width=1000,height=1000');
+        })
+        .catch(error => console.log('error', error));
+    },
     rotateViewport: ({ rotation }) => {
       const enabledElement = _getActiveViewportEnabledElement();
       if (!enabledElement) {
@@ -479,6 +496,9 @@ const commandsModule = ({ servicesManager }) => {
       commandFn: actions.showDownloadViewportModal,
       storeContexts: [],
       options: {},
+    },
+    showReport: {
+      commandFn: actions.showReport,
     },
     toggleCine: {
       commandFn: actions.toggleCine,

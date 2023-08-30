@@ -43,6 +43,7 @@ function Header({
               'inline-flex items-center mr-3',
               isReturnEnabled && 'cursor-pointer'
             )}
+            onClick={onClickReturn}
           >
             <div className="ml-4">
               {WhiteLabeling ? CustomLogo(React) : <Svg name="logo-ohif" />}

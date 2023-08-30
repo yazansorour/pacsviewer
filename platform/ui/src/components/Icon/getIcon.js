@@ -60,6 +60,7 @@ import notificationsSuccess from './../../assets/icons/notifications-success.svg
 
 /** Tools */
 import toolZoom from './../../assets/icons/tool-zoom.svg';
+import report from './../../assets/icons/report.svg';
 import toolCapture from './../../assets/icons/tool-capture.svg';
 import toolLayout from './../../assets/icons/tool-layout.svg';
 import toolMore from './../../assets/icons/tool-more-menu.svg';
@@ -163,6 +164,7 @@ const ICONS = {
 
   /** Tools */
   'tool-zoom': toolZoom,
+  'tool-report': clipboard,
   'tool-capture': toolCapture,
   'tool-layout': toolLayout,
   'tool-more-menu': toolMore,

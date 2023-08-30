@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route,Navigate } from 'react-router-dom';
 import { ErrorBoundary } from '@ohif/ui';
 
 // Route Components
@@ -10,34 +10,12 @@ import Debug from './Debug';
 import NotFound from './NotFound';
 import buildModeRoutes from './buildModeRoutes';
 import PrivateRoute from './PrivateRoute';
+import Loign from './Auth'
+
 
 const notFoundRoute = { component: NotFound };
 // TODO: Include "routes" debug route if dev build
-const bakedInRoutes = [
-  // WORK LIST
-  {
-    path: '/',
-    children: DataSourceWrapper,
-    private: true,
-    props: { children: NotFound },
-  },
-  {
-    path: '/debug',
-    children: Debug,
-  },
-  {
-    path: '/local',
-    children: Local,
-  },
-];
 
-// NOT FOUND (404)
-const WorkListRoute = {
-  path: '/',
-  children: DataSourceWrapper,
-  private: true,
-  props: { children: NotFound },
-};
 
 const createRoutes = ({
   modes,
@@ -60,6 +38,44 @@ const createRoutes = ({
     }) || [];
 
   const { customizationService } = servicesManager.services;
+  const bakedInRoutes = [
+    // WORK LIST
+    {
+      path: '/',
+      children: DataSourceWrapper,
+      private: true,
+      props: { children: WorkList, servicesManager },
+    },
+    {
+      path: '/debug',
+      children: Debug,
+    },
+    {
+      path: '/local',
+      children: Local,
+    },
+  ];
+  
+  // NOT FOUND (404)
+  const WorkListRoute = {
+    path: '/',
+    children: DataSourceWrapper,
+    private: true,
+    props: { children: WorkList, servicesManager },
+  };
+
+  const studiesRoute = {
+    path: '/studies',
+    children: DataSourceWrapper,
+    private: true,
+    props: { children: WorkList, servicesManager },
+  };
+
+  const loginRoute = {
+    path: '/login',
+    children: Loign,
+    private: false,
+  }
 
   const customRoutes = customizationService.getGlobalCustomization(
     'customRoutes'
@@ -69,6 +85,8 @@ const createRoutes = ({
     ...(showStudyList ? [WorkListRoute] : []),
     ...(customRoutes?.routes || []),
     ...bakedInRoutes,
+    studiesRoute,
+    loginRoute,
     customRoutes?.notFoundRoute || notFoundRoute,
   ];
 
@@ -88,7 +106,7 @@ const createRoutes = ({
   }
 
   const { UserAuthenticationService } = servicesManager.services;
-
+  const user: string = localStorage.getItem('token');
   // Note: PrivateRoutes in react-router-dom 6.x should be defined within
   // a Route element
   return (
@@ -100,13 +118,15 @@ const createRoutes = ({
             exact
             path={route.path}
             element={
+              user != null ?
               <PrivateRoute
                 handleUnauthenticated={
                   UserAuthenticationService.handleUnauthenticated
                 }
               >
                 <RouteWithErrorBoundary route={route} />
-              </PrivateRoute>
+              </PrivateRoute> :
+              <Navigate to="/login"></Navigate>
             }
           ></Route>
         ) : (

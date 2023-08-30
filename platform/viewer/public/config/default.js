@@ -14,9 +14,9 @@ window.config = {
       sourceName: 'dicomweb',
       configuration: {
         name: 'Orthanc',
-        wadoUriRoot: 'http://mohintreg.duckdns.org:2056/wado',
-        qidoRoot: 'http://mohintreg.duckdns.org:2056/dicom-web',
-        wadoRoot: 'http://mohintreg.duckdns.org:2056/dicom-web',
+        wadoUriRoot: 'http://10.10.215.70:2056/wado',
+        qidoRoot: 'http://10.10.215.70:2056/dicom-web',
+        wadoRoot: 'http://10.10.215.70:2056/dicom-web',
         qidoSupportsIncludeField: false,
         imageRendering: 'wadors',
         thumbnailRendering: 'wadors',

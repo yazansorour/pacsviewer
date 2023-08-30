@@ -113,6 +113,7 @@ function modeFactory() {
       ToolBarService.createButtonSection('primary', [
         'MeasurementTools',
         'Zoom',
+        'Report',
         'WindowLevel',
         'Pan',
         'Capture',
